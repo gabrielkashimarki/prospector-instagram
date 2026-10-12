@@ -147,10 +147,10 @@ Também podem aparecer: `descartado` (não passou na nota), `sem_perfil`, `via_d
 Depois da primeira DM você escolhe, no assistente ou em `caixa.provedor`:
 
 - **`nenhum` (padrão)**: você responde pelo celular. No modo envio, alguns dias depois o programa abre a conversa no Chrome para ver quem respondeu e marca como lead quente.
-- **`zernio`**: lê e responde pela API da Zernio (gratuita para uma conta). Crie a conta em zernio.com, conecte o Instagram, copie a chave da API para o `.env` (`ZERNIO_API_KEY`) e o id da conta para `caixa.zernio_conta`.
+- **`zernio`**: lê e responde pela API da Zernio (tem plano gratuito; confira os limites no site). Crie a conta em zernio.com, conecte o Instagram, copie a chave da API para o `.env` (`ZERNIO_API_KEY`) e o id da conta para `caixa.zernio_conta`.
 - **`meta`**: pelo seu próprio app da Meta (passo a passo abaixo).
 
-Com `zernio` ou `meta`, quem responde vira lead quente e a IA escreve um rascunho de resposta. Por padrão (`respostas: rascunho`) nada sai sem você: veja com `npm run respostas` e envie com `npm run aprovar -- 12` (ou `--todas`). `automatico` envia sozinho e `desligado` não escreve rascunho. A Meta só deixa responder até 24 horas depois da última mensagem do contato; fora disso o rascunho fica como `fora_da_janela`.
+Com `zernio` ou `meta`, quem responde vira lead quente e a IA escreve um rascunho de resposta. Por padrão (`respostas: rascunho`) nada sai sem você: veja com `npm run respostas` e envie com `npm run aprovar -- 12` (ou `--todas`). `automatico` envia sozinho, mesmo com `modo: rascunho` (esse modo vale para a primeira DM pelo Chrome), e `desligado` não escreve rascunho. A Meta só deixa responder até 24 horas depois da última mensagem do contato; fora disso o rascunho fica como `fora_da_janela`.
 
 ### App próprio da Meta, passo a passo
 
