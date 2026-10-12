@@ -1,0 +1,125 @@
+# Configuração do prospector. O `npm run instalar` copia este arquivo para config.yaml e preenche
+# as respostas do assistente. Depois disso você pode editar o config.yaml à vontade.
+#
+# TUDO AQUI É EXEMPLO. Os textos usam "lojas de roupa feminina" só para ilustrar:
+# troque pelo seu nicho (clínicas, academias, escritórios de contabilidade, o que for).
+
+# Quem você procura, em poucas palavras. Vai para os prompts da IA.
+nicho: "lojas de roupa feminina"
+
+# Você. O @ é a conta do Instagram logada no Chrome dedicado desta máquina.
+# Com vários computadores na mesma base (Supabase), cada um usa um @ diferente.
+operador:
+  nome: "Seu nome"
+  instagram: "sua_conta"
+
+descoberta:
+  # Termos para a busca de contas do Instagram.
+  buscas: ["loja de roupa feminina", "boutique moda feminina"]
+  # Hashtags, sem o #.
+  hashtags: ["modafeminina", "boutiqueonline"]
+  # Perfis que você já conhece e quer avaliar direto, sem o @.
+  perfis: []
+  # Quantos perfis no máximo cada busca ou hashtag traz por vez.
+  max_perfis_por_busca: 20
+  # Perfis que nunca devem ser abordados (clientes, concorrentes, amigos), sem o @.
+  nunca_contatar: []
+
+qualificacao:
+  # Palavras que indicam o perfil certo (no nome, na bio ou nas legendas).
+  palavras_chave: ["moda", "boutique", "roupa", "look", "vestido"]
+  # Palavras que eliminam o perfil na hora.
+  palavras_negativas: ["atacado", "fornecedor", "vagas"]
+  seguidores_min: 300
+  seguidores_max: 100000
+  posts_min: 10
+  # De 0 a 100. Perfil com nota igual ou acima disso vira rascunho de mensagem.
+  pontuacao_minima: 60
+  # A IA lê o perfil e dá uma nota de encaixe. Desligue para qualificar só pelas regras acima (custo zero).
+  usar_ia: true
+  cliente_ideal: "Loja pequena ou média de roupa feminina, com perfil comercial ativo, que vende pelo Instagram."
+
+dono:
+  # Se a bio disser quem decide ("CEO: @fulano"), aborda a pessoa em vez da empresa.
+  buscar_na_bio: true
+
+mensagem:
+  remetente: "Seu nome"
+  empresa: "Sua empresa"
+  oferta: "uma frase sobre o que você oferece"
+  objetivo: "começar uma conversa; não vender na primeira mensagem"
+  tom: "informal, direto, simpático, sem exagero de emoji"
+  regras:
+    - "Três linhas no máximo."
+    - "Não use travessão."
+  max_caracteres: 350
+
+# rascunho (PADRÃO): descobre, qualifica e escreve as mensagens, mas NÃO envia nada.
+# envio: envia as DMs de verdade pelo Chrome. Só ligue depois de ler os rascunhos no `npm run exportar`.
+modo: rascunho
+
+# Curtir o último post do perfil antes da DM (só no modo envio).
+curtir_antes_da_dm: false
+
+# Segundo contato para quem não respondeu (só no modo envio).
+seguimento:
+  ativo: false
+  dias: 3
+  maximo: 1
+
+# Limites por conta do Instagram. Os padrões são conservadores de propósito.
+# intervalo_segundos: espera mínima sorteada entre duas ações do mesmo tipo.
+limites:
+  dm: { por_dia: 20, por_hora: 4, intervalo_segundos: [300, 720] }
+  curtida: { por_dia: 30, por_hora: 8, intervalo_segundos: [90, 300] }
+  leitura: { por_dia: 200, por_hora: 30, intervalo_segundos: [30, 90] }
+  busca: { por_dia: 15, por_hora: 3, intervalo_segundos: [300, 900] }
+  # Conta nova em prospecção começa devagar: 5 DMs por dia na primeira semana, +5 a cada semana,
+  # até o limite de dm.por_dia.
+  aquecimento: { dm_por_dia_inicial: 5, aumento_por_semana: 5 }
+  # Falhas na última hora que pausam tudo (Chrome fechado não conta).
+  falhas_por_hora: 8
+
+# Horário em que o navegador trabalha. Fora dele, nada acontece na conta.
+janela:
+  inicio: "09:00"
+  fim: "18:30"
+  dias: [seg, ter, qua, qui, sex]
+  fuso: "America/Sao_Paulo"
+
+pausas:
+  entre_acoes_segundos: [20, 75]
+  pausa_longa: { a_cada_acoes: 15, minutos: [8, 20] }
+
+ia:
+  # anthropic | openai | openrouter. Preço em dólar por milhão de tokens: confira no site do provedor.
+  provedor: anthropic
+  modelo: claude-haiku-5-5
+  preco_entrada_por_milhao: 0.10
+  preco_saida_por_milhao: 0.50
+  # Gasto máximo por dia. Bateu, a IA para até amanhã (o navegador continua).
+  teto_diario_usd: 0.50
+
+# Respostas depois da primeira DM.
+caixa:
+  # nenhum: você responde pelo celular; o programa abre a conversa no Chrome para ver quem respondeu.
+  # zernio: lê e responde pela API da Zernio.  meta: pelo seu app da Meta (Instagram API).
+  provedor: nenhum
+  sincronizar_a_cada_minutos: 5
+  # sincronizacao: este computador consulta a API de tempos em tempos (padrão).
+  # webhook_supabase: a Edge Function do Supabase avisa na hora (só no modo vários computadores).
+  receber: sincronizacao
+  # desligado | rascunho (a IA escreve, você aprova com `npm run aprovar`) | automatico
+  respostas: rascunho
+  # Id da conta do Instagram dentro da Zernio (só para provedor zernio).
+  zernio_conta: ""
+
+chrome:
+  porta: 9333
+  perfil: ./dados/chrome-perfil
+  # Reinicia o Chrome dedicado a cada N trabalhos para devolver memória (0 desliga).
+  reiniciar_a_cada_jobs: 150
+
+banco:
+  # Usado quando DATABASE_URL está vazia no .env (um computador só).
+  arquivo: ./dados/prospector.db
