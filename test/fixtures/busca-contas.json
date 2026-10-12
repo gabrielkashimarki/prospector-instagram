@@ -1,0 +1,10 @@
+{
+  "users": [
+    { "position": 0, "user": { "username": "Clinica.Exemplo", "full_name": "Clínica Exemplo", "is_private": false } },
+    { "position": 1, "user": { "username": "conta_privada", "full_name": "", "is_private": true } },
+    { "position": 2, "user": { "username": "explore", "full_name": "reservado" } },
+    { "position": 3, "user": { "full_name": "sem usuário" } },
+    { "position": 4, "user": { "username": "terceira.conta", "full_name": "Terceira" } }
+  ],
+  "status": "ok"
+}
