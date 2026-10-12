@@ -1,0 +1,42 @@
+{
+  "name": "prospector-instagram",
+  "version": "0.1.0",
+  "description": "Prospecção no Instagram pelo seu próprio Chrome: descobre, qualifica, escreve a abertura com IA e, se você ligar, envia a DM.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "instalar": "node --disable-warning=ExperimentalWarning src/cli.ts instalar",
+    "chrome": "node --disable-warning=ExperimentalWarning src/cli.ts chrome",
+    "descobrir": "node --disable-warning=ExperimentalWarning src/cli.ts descobrir",
+    "rodar": "node --disable-warning=ExperimentalWarning src/cli.ts rodar",
+    "status": "node --disable-warning=ExperimentalWarning src/cli.ts status",
+    "pausar": "node --disable-warning=ExperimentalWarning src/cli.ts pausar",
+    "retomar": "node --disable-warning=ExperimentalWarning src/cli.ts retomar",
+    "exportar": "node --disable-warning=ExperimentalWarning src/cli.ts exportar",
+    "respostas": "node --disable-warning=ExperimentalWarning src/cli.ts respostas",
+    "aprovar": "node --disable-warning=ExperimentalWarning src/cli.ts aprovar",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "verificar": "npm run typecheck && npm run lint && npm test"
+  },
+  "dependencies": {
+    "playwright-core": "1.64.0",
+    "postgres": "3.4.9",
+    "yaml": "2.9.1",
+    "zod": "4.6.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.19.2",
+    "eslint": "10.12.0",
+    "happy-dom": "21.0.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.1",
+    "vitest": "5.0.4"
+  }
+}

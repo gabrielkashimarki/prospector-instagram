@@ -1,0 +1,15 @@
+node_modules/
+.env
+.env.*
+!.env.example
+config.yaml
+dados/
+exportacoes/
+*.db
+*.db-shm
+*.db-wal
+*.csv
+.chrome-perfil/
+chrome-perfil/
+supabase/.temp/
+.DS_Store
